@@ -59,6 +59,9 @@ function test(response, correctAnswer) {
 
   console.log("wordsInCorrectAnswer:", wordsInCorrectAnswer);
   console.log("wordsInResponse:", wordsInResponse);
+
+  const percentageScore = (pointsScored / maximumPossibleScore) * 100;
+  console.log("percentageScore:", percentageScore);
 }
 
 test(
