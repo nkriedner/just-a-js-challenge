@@ -2,9 +2,8 @@ let wordsInResponse = [];
 let wordsInCorrectAnswer = [];
 
 function test(response, correctAnswer) {
-  // Remove all non numbers and letters in wordsInResponse
-  // const regex = /[^A-Za-z0-9 ]/g;
-  // response = response.replace(regex, "");
+  response = response.toLowerCase();
+  correctAnswer = correctAnswer.toLowerCase();
   console.log(response);
 
   let maximumPossibleScore = 0;
@@ -15,13 +14,14 @@ function test(response, correctAnswer) {
 
   for (let i = 0; i < wordsInCorrectAnswer.length; i++) {
     console.log(wordsInCorrectAnswer[i]);
-    if (!isNaN(wordsInCorrectAnswer[i])) {
+    let wordInCorrectAnswer = wordsInCorrectAnswer[i].replace(".", "");
+    if (!isNaN(wordInCorrectAnswer)) {
       console.log("+4");
       maximumPossibleScore += 4;
-    } else if (wordsInCorrectAnswer[i].length > 7) {
+    } else if (wordInCorrectAnswer.length > 7) {
       maximumPossibleScore += 3;
       console.log("+3");
-    } else if (wordsInCorrectAnswer[i].length < 5) {
+    } else if (wordInCorrectAnswer.length < 5) {
       maximumPossibleScore += 0;
       console.log("+0");
     } else {
@@ -32,15 +32,17 @@ function test(response, correctAnswer) {
 
   // Check matches
   for (let j = 0; j < wordsInResponse.length; j++) {
-    if (correctAnswer.includes(wordsInResponse[j])) {
-      console.log(wordsInResponse[j] + " is included");
-      if (!isNaN(wordsInResponse[j])) {
+    let wordToCheck = wordsInResponse[j].replace(".", "");
+    wordToCheck.replace(",", "");
+    if (correctAnswer.includes(wordToCheck)) {
+      console.log(wordToCheck + " is included");
+      if (!isNaN(wordToCheck)) {
         console.log("+4");
         pointsScored += 4;
-      } else if (wordsInResponse[j].length > 7) {
+      } else if (wordToCheck.length > 7) {
         pointsScored += 3;
         console.log("+3");
-      } else if (wordsInResponse[j].length < 5) {
+      } else if (wordToCheck.length < 5) {
         pointsScored += 0;
         console.log("+0");
       } else {
@@ -48,7 +50,7 @@ function test(response, correctAnswer) {
         console.log("+1");
       }
     } else {
-      console.log(wordsInResponse[j] + " is NOT included");
+      console.log(wordToCheck + " is NOT included");
     }
   }
 
